@@ -1,0 +1,85 @@
+﻿{
+  "Type": "View",
+  "Version": 1,
+  "DisplayName": "Add Employee",
+  "Description": "",
+  "DesignVersion": "1.0.0",
+  "Template": "Vue/Form",
+  "Events": {
+    "commit_api": {
+      "Name": "commit_api",
+      "OptionApi": "Employee.Create"
+    }
+  },
+  "Areas": {
+    "area_form": {
+      "Source": "Employee",
+      "Properties": {
+        "label_format": "Top",
+        "form_layout": "Vertical",
+        "form_hori_column": "1",
+        "label_width": 130
+      },
+      "Fields": {
+        "FirstName": {
+          "DisplayName": "First Name",
+          "DisplayType": "Text",
+          "Description": "",
+          "WaterMark": ""
+        },
+        "LastName": {
+          "DisplayName": "Last Name",
+          "DisplayType": "Text",
+          "Description": "",
+          "WaterMark": ""
+        },
+        "Gender": {
+          "DisplayName": "Gender",
+          "DisplayType": "SelectBox",
+          "Description": "",
+          "WaterMark": ""
+        },
+        "Phone": {
+          "DisplayName": "Phone Number",
+          "DisplayType": "Text",
+          "Description": "",
+          "WaterMark": "e.g., +86-1234567890"
+        },
+        "HireDate": {
+          "DisplayName": "Hire Date",
+          "DisplayType": "DatePicker",
+          "Description": "",
+          "WaterMark": ""
+        },
+        "TrialMonths": {
+          "DisplayName": "Trial Months",
+          "DisplayType": "Number",
+          "Description": "",
+          "WaterMark": "Please input 1 - 12"
+        },
+        "Department": {
+          "DisplayName": "Department",
+          "DisplayType": "SelectBox",
+          "Description": "",
+          "OptionApi": "Department.GetList",
+          "OptionSelectName": "DepartmentName",
+          "WaterMark": ""
+        }
+      },
+      "Menus": []
+    },
+    "area_actions": {
+      "Properties": {
+        "actions_format": "right"
+      },
+      "Fields": {},
+      "Menus": []
+    }
+  },
+  "Properities": {},
+  "Parameters": {},
+  "References": {
+    "Employee": "..\\..\\Entity\\Employee.dmedm",
+    "Department": "..\\..\\Entity\\Department.dmedm"
+  }
+}

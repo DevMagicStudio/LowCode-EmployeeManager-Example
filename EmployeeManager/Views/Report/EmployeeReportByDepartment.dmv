@@ -1,0 +1,81 @@
+﻿{
+  "Type": "View",
+  "Version": 1,
+  "DisplayName": "Employee Summary By Department",
+  "Description": "",
+  "DesignVersion": "1.0.0",
+  "Template": "Vue/Index_Search",
+  "Events": {
+    "query_api": {
+      "Name": "query_api",
+      "OptionApi": "DepartmentUsers.OldEmployeesSummaryGetPage"
+    }
+  },
+  "Areas": {
+    "area_search": {
+      "Source": "DepartmentUsers",
+      "Condition": "OldEmployeesSummaryByDepartment",
+      "Properties": {
+        "search_label_format": "Right",
+        "search_label_width": 130
+      },
+      "Fields": {
+        "HiredYears": {
+          "DisplayName": "Hired Years",
+          "DisplayType": "Number",
+          "Description": "",
+          "WaterMark": ""
+        }
+      },
+      "Menus": []
+    },
+    "area_table_head": {
+      "Properties": {
+        "btn_create_enabled": false,
+        "btn_create_style": "dialog"
+      },
+      "Fields": {},
+      "Menus": []
+    },
+    "area_table": {
+      "Source": "DepartmentUsers",
+      "Properties": {
+        "is_data_mounted": true,
+        "btn_update_enabled": false,
+        "btn_update_style": "dialog",
+        "btn_detail_enabled": false,
+        "btn_detail_style": "dialog",
+        "btn_delete_enabled": false,
+        "table_column_ellipsis": true
+      },
+      "Fields": {
+        "Name": {
+          "DisplayName": "Department",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "EmployeeCount": {
+          "DisplayName": "Employee Count",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "MaleCount": {
+          "DisplayName": "Male Employee Count",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "FemaleCount": {
+          "DisplayName": "Female Employee Count",
+          "DisplayType": "Text",
+          "Description": ""
+        }
+      },
+      "Menus": []
+    }
+  },
+  "Properities": {},
+  "Parameters": {},
+  "References": {
+    "DepartmentUsers": "..\\..\\Model\\DepartmentUsers.dmmdl"
+  }
+}

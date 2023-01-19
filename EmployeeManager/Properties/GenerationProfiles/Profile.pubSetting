@@ -1,0 +1,42 @@
+{
+  "targets": {
+    "EmployeeManager": {
+      "rootNamespace": "EmployeeManager",
+      "targetDirectory": "..\\SourceCode"
+    }
+  },
+  "serverTemplateId": "EFCore",
+  "serverItems": {
+    "Entity": {
+      "nameRule": "",
+      "projectSuffix": "Services",
+      "relativeDirectory": "Entities"
+    },
+    "Model": {
+      "nameRule": "",
+      "projectSuffix": "Services",
+      "relativeDirectory": "Models"
+    },
+    "Service": {
+      "nameRule": "",
+      "projectSuffix": "Services",
+      "relativeDirectory": "Services"
+    },
+    "Controller": {
+      "nameRule": "",
+      "projectSuffix": "Controllers",
+      "relativeDirectory": ""
+    }
+  },
+  "clientTemplateId": "Vue",
+  "connectionName": "data.db",
+  "databaseType": "Sqlite",
+  "connectionString": "eyJCb2R5IjoiN2lHMUh5VHVuZ1B4RTczM2dpXHUwMDJCN1x1MDAyQmM2ZXZVNkc4SUR5by9qUDZhSkY3cDg9IiwiSGVhZGVyIjp7IlRpbWVzdGFtcCI6MTY3MzIzMjg2NCwiU2lnbmF0dXJlIjoiNDk3QjU3NEEyM0JEOTkzRUM5MzVDNEVFMzQxNUUxOTAifX0=",
+  "clientItems": {
+    "Page": {
+      "nameRule": "",
+      "projectSuffix": "Vue",
+      "relativeDirectory": "src"
+    }
+  }
+}

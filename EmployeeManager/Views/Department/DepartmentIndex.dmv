@@ -1,0 +1,73 @@
+﻿{
+  "Type": "View",
+  "Version": 1,
+  "DisplayName": "Department Information",
+  "Description": "",
+  "DesignVersion": "1.0.0",
+  "Template": "Vue/Index",
+  "Events": {
+    "query_api": {
+      "Name": "query_api",
+      "OptionApi": "Department.GetPage"
+    }
+  },
+  "Areas": {
+    "area_table_head": {
+      "Properties": {
+        "btn_create_enabled": true,
+        "btn_create_page": "DepartmentCreate",
+        "btn_create_style": "dialog"
+      },
+      "Fields": {},
+      "Menus": []
+    },
+    "area_table": {
+      "Source": "Department",
+      "Properties": {
+        "btn_update_enabled": true,
+        "btn_update_page": "DepartmentUpdate",
+        "btn_update_style": "drawer",
+        "btn_detail_enabled": true,
+        "btn_detail_page": "DepartmentDetail",
+        "btn_detail_style": "dialog",
+        "btn_delete_enabled": true,
+        "btn_delete_api": "@API.Department.Delete",
+        "table_column_ellipsis": true
+      },
+      "Fields": {
+        "Id": {
+          "DisplayName": "Id",
+          "DisplayType": "Text",
+          "Description": "Data unique identifier."
+        },
+        "DepartmentName": {
+          "DisplayName": "DepartmentName",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "SuperiorDepartment": {
+          "DisplayName": "SuperiorDepartment",
+          "DisplayType": "Text",
+          "Description": "",
+          "Formatter": "DepartmentName",
+          "FormatterType": "Field",
+          "ChildrenSetting": "NoDisplay"
+        },
+        "UpdateTime": {
+          "DisplayName": "UpdateTime",
+          "DisplayType": "Text",
+          "Description": ""
+        }
+      },
+      "Menus": []
+    }
+  },
+  "Properities": {},
+  "Parameters": {},
+  "References": {
+    "DepartmentCreate": "DepartmentCreate.dmv",
+    "DepartmentUpdate": "DepartmentUpdate.dmv",
+    "DepartmentDetail": "DepartmentDetail.dmv",
+    "Department": "..\\..\\Entity\\Department.dmedm"
+  }
+}

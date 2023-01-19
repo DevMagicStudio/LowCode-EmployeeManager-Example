@@ -1,0 +1,73 @@
+﻿{
+  "Type": "View",
+  "Version": 1,
+  "DisplayName": "Update Department",
+  "Description": "",
+  "DesignVersion": "1.0.0",
+  "Template": "Vue/Form",
+  "Events": {
+    "commit_api": {
+      "Name": "commit_api",
+      "OptionApi": "Department.Update"
+    },
+    "query_api": {
+      "Name": "query_api",
+      "OptionApi": "Department.Get"
+    }
+  },
+  "Areas": {
+    "area_form": {
+      "Source": "Department",
+      "Properties": {
+        "label_format": "Top",
+        "form_layout": "Vertical",
+        "form_hori_column": "1",
+        "label_width": 300
+      },
+      "Fields": {
+        "Id": {
+          "DisplayName": "Id",
+          "DisplayType": "Number",
+          "Description": "Data unique identifier.",
+          "WaterMark": "Data unique identifier.",
+          "IsReadOnly": true
+        },
+        "DepartmentName": {
+          "DisplayName": "Department Name",
+          "DisplayType": "Text",
+          "Description": "",
+          "WaterMark": ""
+        },
+        "SuperiorDepartment": {
+          "DisplayName": "Superior Department",
+          "DisplayType": "SelectBox",
+          "Description": "",
+          "OptionApi": "Department.GetList",
+          "OptionSelectName": "DepartmentName",
+          "WaterMark": ""
+        },
+        "UpdateTime": {
+          "DisplayName": "Update Time",
+          "DisplayType": "DatePicker",
+          "Description": "",
+          "WaterMark": ""
+        }
+      },
+      "Menus": []
+    },
+    "area_actions": {
+      "Properties": {
+        "actions_format": "right"
+      },
+      "Fields": {},
+      "Menus": []
+    }
+  },
+  "Properities": {},
+  "Parameters": {
+    "Id": "Department.Id"
+  },
+  "References": {
+    "Department": "..\\..\\Entity\\Department.dmedm"
+  }
+}

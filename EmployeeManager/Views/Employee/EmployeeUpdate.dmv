@@ -1,0 +1,120 @@
+﻿{
+  "Type": "View",
+  "Version": 1,
+  "DisplayName": "Update Employee",
+  "Description": "",
+  "DesignVersion": "1.0.0",
+  "Template": "Vue/Form",
+  "Events": {
+    "commit_api": {
+      "Name": "commit_api",
+      "OptionApi": "Employee.Update"
+    },
+    "query_api": {
+      "Name": "query_api",
+      "OptionApi": "Employee.Get"
+    }
+  },
+  "Areas": {
+    "area_form": {
+      "Source": "Employee",
+      "Properties": {
+        "label_format": "Top",
+        "form_layout": "Vertical",
+        "form_hori_column": "1",
+        "label_width": 130
+      },
+      "Fields": {
+        "Id": {
+          "DisplayName": "Id",
+          "DisplayType": "Number",
+          "Description": "Data unique identifier.",
+          "WaterMark": "Data unique identifier.",
+          "IsReadOnly": true
+        },
+        "FirstName": {
+          "DisplayName": "First Name",
+          "DisplayType": "Text",
+          "Description": "",
+          "WaterMark": ""
+        },
+        "LastName": {
+          "DisplayName": "Last Name",
+          "DisplayType": "Text",
+          "Description": "",
+          "WaterMark": ""
+        },
+        "FullName": {
+          "DisplayName": "Full Name",
+          "DisplayType": "Text",
+          "Description": "",
+          "WaterMark": "",
+          "IsReadOnly": true
+        },
+        "Gender": {
+          "DisplayName": "Gender",
+          "DisplayType": "SelectBox",
+          "Description": "",
+          "WaterMark": "",
+          "IsReadOnly": true
+        },
+        "Phone": {
+          "DisplayName": "Phone Number",
+          "DisplayType": "Text",
+          "Description": "",
+          "WaterMark": "e.g., +86-1234567890"
+        },
+        "Manager": {
+          "DisplayName": "Manager",
+          "DisplayType": "SelectBox",
+          "Description": "",
+          "OptionApi": "Employee.GetList",
+          "OptionSelectName": "FullName",
+          "WaterMark": ""
+        },
+        "HireDate": {
+          "DisplayName": "Hire Date",
+          "DisplayType": "DatePicker",
+          "Description": "",
+          "WaterMark": ""
+        },
+        "TrialMonths": {
+          "DisplayName": "Trial Months",
+          "DisplayType": "Number",
+          "Description": "",
+          "WaterMark": ""
+        },
+        "Department": {
+          "DisplayName": "Department",
+          "DisplayType": "SelectBox",
+          "Description": "",
+          "OptionApi": "Department.GetList",
+          "OptionSelectName": "DepartmentName",
+          "WaterMark": ""
+        },
+        "UpdateTime": {
+          "DisplayName": "Update Time",
+          "DisplayType": "DatePicker",
+          "Description": "",
+          "WaterMark": ""
+        }
+      },
+      "Menus": []
+    },
+    "area_actions": {
+      "Properties": {
+        "actions_format": "right"
+      },
+      "Fields": {},
+      "Menus": []
+    }
+  },
+  "Properities": {},
+  "Parameters": {
+    "Id": "Employee.Id"
+  },
+  "References": {
+    "Employee": "..\\..\\Entity\\Employee.dmedm",
+    "Department": "..\\..\\Entity\\Department.dmedm"
+  }
+}

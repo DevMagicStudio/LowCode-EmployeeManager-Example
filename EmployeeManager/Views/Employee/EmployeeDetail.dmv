@@ -1,0 +1,106 @@
+﻿{
+  "Type": "View",
+  "Version": 1,
+  "DisplayName": "Employee Details",
+  "Description": "",
+  "DesignVersion": "1.0.0",
+  "Template": "Vue/Detail",
+  "Events": {
+    "query_api": {
+      "Name": "query_api",
+      "OptionApi": "Employee.Get"
+    }
+  },
+  "Areas": {
+    "area_detail": {
+      "Source": "Employee",
+      "Properties": {
+        "is_bordered": true,
+        "detail_layout": "vertical",
+        "detail_column": 1,
+        "detail_size": "middle"
+      },
+      "Fields": {
+        "FirstName": {
+          "DisplayName": "First Name",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "LastName": {
+          "DisplayName": "Last Name",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "FullName": {
+          "DisplayName": "Full Name",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "Gender": {
+          "DisplayName": "Gender",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "Phone": {
+          "DisplayName": "Phone Number",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "HireDate": {
+          "DisplayName": "Hire Date",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "TrialMonths": {
+          "DisplayName": "Trial Months",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "IsTrial": {
+          "DisplayName": "Is Trial",
+          "DisplayType": "CheckBox",
+          "Description": ""
+        },
+        "Department": {
+          "DisplayName": "Department",
+          "DisplayType": "Text",
+          "Description": "",
+          "Formatter": "DepartmentName",
+          "FormatterType": "Field",
+          "ChildrenSetting": "NoDisplay"
+        },
+        "Id": {
+          "DisplayName": "Id",
+          "DisplayType": "Text",
+          "Description": "Data unique identifier."
+        },
+        "UpdateTime": {
+          "DisplayName": "Update Time",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "Manager": {
+          "DisplayName": "Manager",
+          "DisplayType": "Text",
+          "Description": "",
+          "Formatter": "FullName",
+          "FormatterType": "Field",
+          "ChildrenSetting": "NoDisplay"
+        },
+        "IsManager": {
+          "DisplayName": "Is Manager",
+          "DisplayType": "CheckBox",
+          "Description": ""
+        }
+      },
+      "Menus": []
+    }
+  },
+  "Properities": {},
+  "Parameters": {
+    "Id": "Employee.Id"
+  },
+  "References": {
+    "Employee": "..\\..\\Entity\\Employee.dmedm"
+  }
+}

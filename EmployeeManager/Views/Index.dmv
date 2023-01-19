@@ -1,0 +1,85 @@
+﻿{
+  "Type": "View",
+  "Version": 1,
+  "DisplayName": "Index",
+  "Description": "Employee Management",
+  "DesignVersion": "1.0.0",
+  "Template": "Vue/Layout",
+  "Events": {},
+  "Areas": {
+    "area_menu": {
+      "Properties": {},
+      "Fields": {},
+      "Menus": [
+        {
+          "DisplayName": "Department",
+          "Description": "Department Management",
+          "Page": "DepartmentIndex"
+        },
+        {
+          "DisplayName": "Employee",
+          "Description": "Employee Management",
+          "Page": "EmployeeIndex"
+        },
+        {
+          "DisplayName": "Employee Filter",
+          "Description": "Employee Filter ",
+          "Children": [
+            {
+              "DisplayName": "Filter By Department",
+              "Description": "Filter By Department",
+              "Page": "DepartmentUser"
+            },
+            {
+              "DisplayName": "Filter By Manager",
+              "Description": "Filter By Manager",
+              "Page": "LeaderChilds"
+            }
+          ]
+        },
+        {
+          "DisplayName": "Employee Summary",
+          "Description": "Employee Summary",
+          "Children": [
+            {
+              "DisplayName": "Summary By Department",
+              "Description": "Summary By Department",
+              "Page": "EmployeeReportByDepartment"
+            },
+            {
+              "DisplayName": "Summary By Manager",
+              "Description": "Summary By Manager",
+              "Page": "EmployeeReportByLeader"
+            }
+          ]
+        }
+      ]
+    },
+    "area_menu_title": {
+      "Properties": {
+        "title_name": "Employee Management",
+        "title_size": 14
+      },
+      "Fields": {},
+      "Menus": []
+    },
+    "area_header_config": {
+      "Properties": {
+        "default_menu_mode": "DEFAULT",
+        "default_layout_style": "LIGHT"
+      },
+      "Fields": {},
+      "Menus": []
+    }
+  },
+  "Properities": {},
+  "Parameters": {},
+  "References": {
+    "DepartmentIndex": "Department\\DepartmentIndex.dmv",
+    "EmployeeIndex": "Employee\\EmployeeIndex.dmv",
+    "DepartmentUser": "Employee\\DepartmentUser.dmv",
+    "LeaderChilds": "Employee\\LeaderChilds.dmv",
+    "EmployeeReportByDepartment": "Report\\EmployeeReportByDepartment.dmv",
+    "EmployeeReportByLeader": "Report\\EmployeeReportByLeader.dmv"
+  }
+}

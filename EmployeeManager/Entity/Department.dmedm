@@ -1,0 +1,249 @@
+﻿{
+  "Type": "Entity",
+  "Version": 1,
+  "DisplayName": "Department",
+  "Description": "Department",
+  "DesignVersion": "1.0.0",
+  "BaseType": "BaseEntity",
+  "InheritStrategy": "",
+  "Fields": {
+    "DepartmentName": {
+      "DisplayName": "DepartmentName",
+      "Description": "",
+      "Type": "String",
+      "DataType": "String",
+      "IsRequired": true,
+      "DefaultValueType": "Value",
+      "MinLength": 2,
+      "MaxLength": 20,
+      "StringLengthError": "The length must be 2 - 20"
+    },
+    "SuperiorDepartment": {
+      "KeyName": "",
+      "DeleteBehavior": "SetNull",
+      "DisplayName": "SuperiorDepartment",
+      "Description": "",
+      "Type": "Entity",
+      "DataType": "Department",
+      "IsRequiredError": "",
+      "Conversion": "",
+      "IsNullable": true,
+      "AssociateField": "Department.Id"
+    },
+    "Employees": {
+      "DisplayName": "Employees",
+      "Description": "",
+      "Type": "Entity",
+      "DataType": "Employee",
+      "IsCollection": true,
+      "IsRequiredError": "",
+      "IsNullable": true,
+      "AssociateField": "Employee.Department"
+    }
+  },
+  "Indexs": [],
+  "Conditions": {},
+  "Api": {
+    "Items": {
+      "Get": {
+        "Type": "Get",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "Request": [
+          {
+            "Value": "Id"
+          }
+        ],
+        "Response": {
+          "Parameter": "GetResponse"
+        },
+        "Orders": [],
+        "Groups": []
+      },
+      "GetList": {
+        "Type": "GetList",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "Request": [],
+        "Response": {
+          "Parameter": "GetListResponse"
+        },
+        "Orders": [],
+        "Groups": []
+      },
+      "GetPage": {
+        "Type": "GetPage",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "Request": [],
+        "Response": {
+          "Parameter": "GetPageResponse"
+        },
+        "Orders": [],
+        "Groups": []
+      },
+      "Create": {
+        "Type": "Create",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "DocumentApiMethod": "POST",
+        "Request": [
+          {
+            "Value": "CreateRequest",
+            "Category": "Parameter"
+          }
+        ],
+        "Orders": [],
+        "Groups": []
+      },
+      "Update": {
+        "Type": "Update",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "DocumentApiMethod": "PUT",
+        "Request": [
+          {
+            "Value": "Id"
+          },
+          {
+            "Value": "UpdateRequest",
+            "Category": "Parameter"
+          }
+        ],
+        "Orders": [],
+        "Groups": []
+      },
+      "Delete": {
+        "Type": "Delete",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "DocumentApiMethod": "DELETE",
+        "Request": [
+          {
+            "Value": "Id"
+          }
+        ],
+        "Orders": [],
+        "Groups": []
+      }
+    },
+    "Parameters": {
+      "GetResponse": {
+        "Fields": [
+          {
+            "Name": "DepartmentName",
+            "Children": []
+          },
+          {
+            "Name": "SuperiorDepartment",
+            "Children": [
+              {
+                "Name": "DepartmentName",
+                "Children": []
+              },
+              {
+                "Name": "Id",
+                "Children": []
+              }
+            ]
+          },
+          {
+            "Name": "Id",
+            "Children": []
+          },
+          {
+            "Name": "UpdateTime",
+            "Children": []
+          }
+        ]
+      },
+      "GetListResponse": {
+        "Fields": [
+          {
+            "Name": "DepartmentName",
+            "Children": []
+          },
+          {
+            "Name": "Id",
+            "Children": []
+          }
+        ]
+      },
+      "GetPageResponse": {
+        "Fields": [
+          {
+            "Name": "DepartmentName",
+            "Children": []
+          },
+          {
+            "Name": "SuperiorDepartment",
+            "Children": [
+              {
+                "Name": "DepartmentName",
+                "Children": []
+              }
+            ]
+          },
+          {
+            "Name": "Id",
+            "Children": []
+          },
+          {
+            "Name": "UpdateTime",
+            "Children": []
+          }
+        ]
+      },
+      "CreateRequest": {
+        "Fields": [
+          {
+            "Name": "DepartmentName",
+            "Children": []
+          }
+        ]
+      },
+      "UpdateRequest": {
+        "Fields": [
+          {
+            "Name": "DepartmentName",
+            "Children": []
+          },
+          {
+            "Name": "SuperiorDepartment",
+            "Children": []
+          },
+          {
+            "Name": "Id",
+            "Children": []
+          },
+          {
+            "Name": "UpdateTime",
+            "Children": []
+          }
+        ]
+      }
+    }
+  },
+  "References": {
+    "BaseEntity": "BaseEntity.dmedm",
+    "Employee": "Employee.dmedm"
+  }
+}

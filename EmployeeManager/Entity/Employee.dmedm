@@ -1,0 +1,834 @@
+﻿{
+  "Type": "Entity",
+  "Version": 1,
+  "DisplayName": "Employee",
+  "Description": "Employee",
+  "DesignVersion": "1.0.0",
+  "BaseType": "BaseEntity",
+  "InheritStrategy": "",
+  "Fields": {
+    "FirstName": {
+      "DisplayName": "FirstName",
+      "Description": "",
+      "Type": "String",
+      "DataType": "String",
+      "IsRequired": true,
+      "DefaultValueType": "Value",
+      "MaxLength": 20
+    },
+    "LastName": {
+      "DisplayName": "LastName",
+      "Description": "",
+      "Type": "String",
+      "DataType": "String",
+      "IsRequired": true,
+      "DefaultValueType": "Value",
+      "MaxLength": 30
+    },
+    "FullName": {
+      "KeyName": "",
+      "DisplayName": "FullName",
+      "Description": "",
+      "Type": "Compute",
+      "DataType": "String",
+      "Conversion": "",
+      "ComputeValue": "((Employee.FirstName + ' ') + Employee.LastName)",
+      "ComputeType": "Expression"
+    },
+    "Gender": {
+      "DisplayName": "Gender",
+      "Description": "",
+      "Type": "Enum",
+      "DataType": "Gender",
+      "Conversion": "EnumToStringConverter",
+      "DefaultValueType": "Value"
+    },
+    "Phone": {
+      "KeyName": "",
+      "DisplayName": "Phone",
+      "Description": "",
+      "Type": "String",
+      "DataType": "String",
+      "IsRequired": true,
+      "IsRequiredError": "",
+      "RegularExpressionError": "The Phone format is incorrect",
+      "RegularExpression": "^(\\+|00)[0-9]{1,4}[ ,-]?[0-9]{4,14}(?:x.+)?$",
+      "DefaultValueType": "Value"
+    },
+    "HireDate": {
+      "DisplayName": "HireDate",
+      "Description": "",
+      "Type": "DateTime",
+      "DataType": "DateTime",
+      "DefaultValue": "Now()",
+      "DefaultValueType": "Expression"
+    },
+    "TrialMonths": {
+      "DisplayName": "TrialMonths",
+      "Description": "",
+      "Type": "Int32",
+      "DataType": "Int32",
+      "DefaultValue": "3",
+      "DefaultValueType": "Value",
+      "MaxValue": 12
+    },
+    "IsTrial": {
+      "DisplayName": "IsTrial",
+      "Description": "",
+      "Type": "Compute",
+      "DataType": "Boolean",
+      "ComputeValue": "(((Year(Now()) * 12) + Month(Now())) < (((Year(Employee.HireDate) * 12) + Month(Employee.HireDate)) + Employee.TrialMonths))",
+      "ComputeType": "Expression"
+    },
+    "Department": {
+      "DeleteBehavior": "Cascade",
+      "DisplayName": "Department",
+      "Description": "",
+      "Type": "Entity",
+      "DataType": "Department",
+      "AssociateField": "Department.Id"
+    },
+    "Manager": {
+      "KeyName": "",
+      "DeleteBehavior": "SetNull",
+      "DisplayName": "Manager",
+      "Description": "",
+      "Type": "Entity",
+      "DataType": "Employee",
+      "IsRequiredError": "",
+      "Conversion": "",
+      "IsNullable": true,
+      "AssociateField": "Employee.Id"
+    },
+    "IsManager": {
+      "KeyName": "",
+      "DisplayName": "IsManager",
+      "Description": "",
+      "Type": "Compute",
+      "DataType": "Boolean",
+      "Conversion": "",
+      "ComputeValue": "IsNull(Employee.Manager)",
+      "ComputeType": "Expression"
+    },
+    "Childs": {
+      "DisplayName": "Childs",
+      "Description": "",
+      "Type": "Entity",
+      "DataType": "Employee",
+      "IsCollection": true,
+      "IsRequiredError": "",
+      "IsNullable": true,
+      "AssociateField": "Employee.Manager"
+    }
+  },
+  "Indexs": [],
+  "Conditions": {
+    "GenericSearch": {
+      "DisplayName": "Generic Search",
+      "Description": "Generic Search",
+      "Fields": {
+        "Keywords": {
+          "DataType": "String",
+          "DisplayName": "Keywords"
+        },
+        "Phone": {
+          "DataType": "String",
+          "DisplayName": "Phone"
+        }
+      },
+      "Sources": [
+        {
+          "Entities": [
+            "Employee"
+          ],
+          "Joins": [],
+          "Items": [
+            {
+              "Type": "Field",
+              "Field": "Employee.Phone",
+              "Operation": "CONTAIN",
+              "ConditionField": "Phone",
+              "Items": []
+            },
+            {
+              "Type": "Scope",
+              "Relation": "AND",
+              "Items": [
+                {
+                  "Type": "Field",
+                  "Field": "Employee.FirstName",
+                  "Operation": "CONTAIN",
+                  "ConditionField": "Keywords",
+                  "Items": []
+                },
+                {
+                  "Type": "Field",
+                  "Relation": "OR",
+                  "Field": "Employee.LastName",
+                  "Operation": "CONTAIN",
+                  "ConditionField": "Keywords",
+                  "Items": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "DepartmentUser": {
+      "DisplayName": "DepartmentUser",
+      "Fields": {
+        "Department": {
+          "Type": "Entity",
+          "DataType": "Department",
+          "DisplayName": "Department"
+        },
+        "IsTrial": {
+          "DataType": "Boolean",
+          "DisplayName": "IsTrial",
+          "DefaultValue": "false"
+        },
+        "Gender": {
+          "Type": "Enum",
+          "DataType": "Gender",
+          "DisplayName": "Gender"
+        }
+      },
+      "Sources": [
+        {
+          "Entities": [
+            "Employee"
+          ],
+          "Joins": [],
+          "Items": [
+            {
+              "Type": "Field",
+              "Field": "Employee.Gender",
+              "Operation": "EQ",
+              "ConditionField": "Gender",
+              "Items": []
+            },
+            {
+              "Type": "Field",
+              "Relation": "AND",
+              "Field": "Employee.Department",
+              "Operation": "EQ",
+              "ConditionField": "Department",
+              "Items": []
+            },
+            {
+              "Type": "Expression",
+              "Relation": "AND",
+              "Expression": "((((Year(Now()) * 12) + Month(Now())) < (((Year(Employee.HireDate) * 12) + Month(Employee.HireDate)) + Employee.TrialMonths)) == Employee.DepartmentUser.IsTrial)",
+              "Items": []
+            }
+          ]
+        }
+      ]
+    },
+    "ChildsSearch": {
+      "DisplayName": "ChildsSearch",
+      "Fields": {
+        "Manager": {
+          "Type": "Entity",
+          "DataType": "Employee",
+          "DisplayName": "Manager"
+        }
+      },
+      "Sources": [
+        {
+          "Entities": [
+            "Employee"
+          ],
+          "Joins": [],
+          "Items": [
+            {
+              "Type": "Field",
+              "Field": "Employee.Manager",
+              "Operation": "EQ",
+              "ConditionField": "Manager",
+              "Items": []
+            }
+          ]
+        }
+      ]
+    },
+    "ManagerFilter": {
+      "DisplayName": "ManagerFilter",
+      "Fields": {},
+      "Sources": [
+        {
+          "Entities": [
+            "Employee"
+          ],
+          "Joins": [],
+          "Items": [
+            {
+              "Type": "Expression",
+              "Expression": "IsNull(Employee.Manager)",
+              "Items": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Api": {
+    "Items": {
+      "Get": {
+        "Type": "Get",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "Request": [
+          {
+            "Value": "Id"
+          }
+        ],
+        "Response": {
+          "Parameter": "GetResponse"
+        },
+        "Orders": [],
+        "Groups": []
+      },
+      "GetList": {
+        "Type": "GetList",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "Request": [],
+        "Response": {
+          "Parameter": "GetListResponse"
+        },
+        "Orders": [],
+        "Groups": []
+      },
+      "Create": {
+        "Type": "Create",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "DocumentApiMethod": "POST",
+        "Request": [
+          {
+            "Value": "CreateRequest",
+            "Category": "Parameter"
+          }
+        ],
+        "Orders": [],
+        "Groups": []
+      },
+      "Update": {
+        "Type": "Update",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "DocumentApiMethod": "PUT",
+        "Request": [
+          {
+            "Value": "Id"
+          },
+          {
+            "Value": "UpdateRequest",
+            "Category": "Parameter"
+          }
+        ],
+        "Orders": [],
+        "Groups": []
+      },
+      "Delete": {
+        "Type": "Delete",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "DocumentApiMethod": "DELETE",
+        "Request": [
+          {
+            "Value": "Id"
+          }
+        ],
+        "Orders": [],
+        "Groups": []
+      },
+      "GenericSearchGetPage": {
+        "Type": "GetPage",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "Category": "Condition",
+        "Request": [
+          {
+            "Value": "GenericSearch",
+            "Category": "Condition"
+          }
+        ],
+        "Response": {
+          "Parameter": "GenericSearchGetPageResponse"
+        },
+        "Orders": [],
+        "Groups": []
+      },
+      "DepartmentUserGetPage": {
+        "Type": "GetPage",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "Category": "Condition",
+        "Request": [
+          {
+            "Value": "DepartmentUser",
+            "Category": "Condition"
+          }
+        ],
+        "Response": {
+          "Parameter": "DeparmentUserGetPageResponse"
+        },
+        "Orders": [
+          {
+            "Source": "Employee",
+            "Items": [
+              {
+                "Type": "Field",
+                "Field": "Employee.Id"
+              }
+            ]
+          }
+        ],
+        "Groups": []
+      },
+      "ChildsSearchGetPage": {
+        "Type": "GetPage",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "Category": "Condition",
+        "Request": [
+          {
+            "Value": "ChildsSearch",
+            "Category": "Condition"
+          }
+        ],
+        "Response": {
+          "Parameter": "ChildsSearchGetPageResponse"
+        },
+        "Orders": [],
+        "Groups": []
+      },
+      "ManagerFilterGetList": {
+        "Type": "GetList",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "Category": "Condition",
+        "Request": [
+          {
+            "Value": "ManagerFilter",
+            "Category": "Condition"
+          }
+        ],
+        "Response": {
+          "Parameter": "ManagerFilterGetListResponse"
+        },
+        "Orders": [],
+        "Groups": []
+      }
+    },
+    "Parameters": {
+      "GetResponse": {
+        "Fields": [
+          {
+            "Name": "FirstName",
+            "Children": []
+          },
+          {
+            "Name": "LastName",
+            "Children": []
+          },
+          {
+            "Name": "FullName",
+            "Children": []
+          },
+          {
+            "Name": "Gender",
+            "Children": []
+          },
+          {
+            "Name": "Phone",
+            "Children": []
+          },
+          {
+            "Name": "HireDate",
+            "Children": []
+          },
+          {
+            "Name": "TrialMonths",
+            "Children": []
+          },
+          {
+            "Name": "IsTrial",
+            "Children": []
+          },
+          {
+            "Name": "Department",
+            "Children": [
+              {
+                "Name": "DepartmentName",
+                "Children": []
+              },
+              {
+                "Name": "Id",
+                "Children": []
+              }
+            ]
+          },
+          {
+            "Name": "Manager",
+            "Children": [
+              {
+                "Name": "FullName",
+                "Children": []
+              },
+              {
+                "Name": "Id",
+                "Children": []
+              }
+            ]
+          },
+          {
+            "Name": "IsManager",
+            "Children": []
+          },
+          {
+            "Name": "Id",
+            "Children": []
+          },
+          {
+            "Name": "UpdateTime",
+            "Children": []
+          }
+        ]
+      },
+      "GetListResponse": {
+        "Fields": [
+          {
+            "Name": "FullName",
+            "Children": []
+          },
+          {
+            "Name": "Id",
+            "Children": []
+          }
+        ]
+      },
+      "CreateRequest": {
+        "Fields": [
+          {
+            "Name": "FirstName",
+            "Children": []
+          },
+          {
+            "Name": "LastName",
+            "Children": []
+          },
+          {
+            "Name": "Gender",
+            "Children": []
+          },
+          {
+            "Name": "Phone",
+            "Children": []
+          },
+          {
+            "Name": "HireDate",
+            "Children": []
+          },
+          {
+            "Name": "TrialMonths",
+            "Children": []
+          },
+          {
+            "Name": "Department",
+            "Children": []
+          }
+        ]
+      },
+      "UpdateRequest": {
+        "Fields": [
+          {
+            "Name": "FirstName",
+            "Children": []
+          },
+          {
+            "Name": "LastName",
+            "Children": []
+          },
+          {
+            "Name": "Gender",
+            "Children": []
+          },
+          {
+            "Name": "Phone",
+            "Children": []
+          },
+          {
+            "Name": "HireDate",
+            "Children": []
+          },
+          {
+            "Name": "TrialMonths",
+            "Children": []
+          },
+          {
+            "Name": "Department",
+            "Children": []
+          },
+          {
+            "Name": "Manager",
+            "Children": []
+          },
+          {
+            "Name": "Id",
+            "Children": []
+          },
+          {
+            "Name": "UpdateTime",
+            "Children": []
+          }
+        ]
+      },
+      "GenericSearchGetPageResponse": {
+        "Fields": [
+          {
+            "Name": "FirstName",
+            "Children": []
+          },
+          {
+            "Name": "LastName",
+            "Children": []
+          },
+          {
+            "Name": "FullName",
+            "Children": []
+          },
+          {
+            "Name": "Gender",
+            "Children": []
+          },
+          {
+            "Name": "Phone",
+            "Children": []
+          },
+          {
+            "Name": "HireDate",
+            "Children": []
+          },
+          {
+            "Name": "TrialMonths",
+            "Children": []
+          },
+          {
+            "Name": "IsTrial",
+            "Children": []
+          },
+          {
+            "Name": "Department",
+            "Children": [
+              {
+                "Name": "DepartmentName",
+                "Children": []
+              }
+            ]
+          },
+          {
+            "Name": "Manager",
+            "Children": [
+              {
+                "Name": "FullName",
+                "Children": []
+              }
+            ]
+          },
+          {
+            "Name": "IsManager",
+            "Children": []
+          },
+          {
+            "Name": "Id",
+            "Children": []
+          },
+          {
+            "Name": "UpdateTime",
+            "Children": []
+          }
+        ]
+      },
+      "DeparmentUserGetPageResponse": {
+        "Fields": [
+          {
+            "Name": "FirstName",
+            "Children": []
+          },
+          {
+            "Name": "LastName",
+            "Children": []
+          },
+          {
+            "Name": "FullName",
+            "Children": []
+          },
+          {
+            "Name": "Gender",
+            "Children": []
+          },
+          {
+            "Name": "Phone",
+            "Children": []
+          },
+          {
+            "Name": "HireDate",
+            "Children": []
+          },
+          {
+            "Name": "TrialMonths",
+            "Children": []
+          },
+          {
+            "Name": "IsTrial",
+            "Children": []
+          },
+          {
+            "Name": "Department",
+            "Children": [
+              {
+                "Name": "DepartmentName",
+                "Children": []
+              }
+            ]
+          },
+          {
+            "Name": "Manager",
+            "Children": [
+              {
+                "Name": "FullName",
+                "Children": []
+              }
+            ]
+          },
+          {
+            "Name": "IsManager",
+            "Children": []
+          },
+          {
+            "Name": "Id",
+            "Children": []
+          },
+          {
+            "Name": "UpdateTime",
+            "Children": []
+          }
+        ]
+      },
+      "ChildsSearchGetPageResponse": {
+        "Fields": [
+          {
+            "Name": "FirstName",
+            "Children": []
+          },
+          {
+            "Name": "LastName",
+            "Children": []
+          },
+          {
+            "Name": "FullName",
+            "Children": []
+          },
+          {
+            "Name": "Gender",
+            "Children": []
+          },
+          {
+            "Name": "Phone",
+            "Children": []
+          },
+          {
+            "Name": "HireDate",
+            "Children": []
+          },
+          {
+            "Name": "TrialMonths",
+            "Children": []
+          },
+          {
+            "Name": "IsTrial",
+            "Children": []
+          },
+          {
+            "Name": "Department",
+            "Children": [
+              {
+                "Name": "DepartmentName",
+                "Children": []
+              }
+            ]
+          },
+          {
+            "Name": "Manager",
+            "Children": [
+              {
+                "Name": "FullName",
+                "Children": []
+              }
+            ]
+          },
+          {
+            "Name": "IsManager",
+            "Children": []
+          },
+          {
+            "Name": "Id",
+            "Children": []
+          },
+          {
+            "Name": "UpdateTime",
+            "Children": []
+          }
+        ]
+      },
+      "ManagerFilterGetListResponse": {
+        "Fields": [
+          {
+            "Name": "FullName",
+            "Children": []
+          },
+          {
+            "Name": "Id",
+            "Children": []
+          }
+        ]
+      }
+    }
+  },
+  "References": {
+    "BaseEntity": "BaseEntity.dmedm",
+    "Gender": "..\\Enum\\Gender.dme",
+    "Department": "Department.dmedm"
+  }
+}

@@ -1,0 +1,190 @@
+﻿{
+  "Type": "Model",
+  "Version": 1,
+  "DisplayName": "DepartmentUsers",
+  "Description": "DepartmentUsers",
+  "DesignVersion": "1.0.0",
+  "Fields": {
+    "Name": {
+      "DisplayName": "Name",
+      "Description": "",
+      "Type": "String",
+      "DataType": "String",
+      "DefaultValueType": "Value"
+    },
+    "EmployeeCount": {
+      "DisplayName": "Employee Count",
+      "Description": "",
+      "Type": "Int32",
+      "DataType": "Int32",
+      "DefaultValueType": "Value"
+    },
+    "MaleCount": {
+      "DisplayName": "Male Count",
+      "Description": "",
+      "Type": "Int32",
+      "DataType": "Int32",
+      "DefaultValueType": "Value"
+    },
+    "FemaleCount": {
+      "DisplayName": "Female Count",
+      "Description": "",
+      "Type": "Compute",
+      "DataType": "Int32",
+      "ComputeValue": "(DepartmentUsers.EmployeeCount - DepartmentUsers.MaleCount)",
+      "ComputeType": "Expression"
+    }
+  },
+  "Conditions": {
+    "OldEmployeesSummaryByDepartment": {
+      "DisplayName": "OldEmployeesSummaryByDepartment",
+      "Description": "每个部门入职1年以上的男女人数",
+      "Fields": {
+        "HiredYears": {
+          "DataType": "Int32",
+          "DisplayName": "HiredYears",
+          "DefaultValue": "1"
+        }
+      },
+      "Sources": [
+        {
+          "Entities": [
+            "Department"
+          ],
+          "Joins": [],
+          "Items": [
+            {
+              "Type": "Expression",
+              "Expression": "Any(((Year(Now()) - Year(Department.Employees.HireDate)) > DepartmentUsers.OldEmployeesSummaryByDepartment.HiredYears))",
+              "Items": []
+            }
+          ]
+        }
+      ]
+    },
+    "OldEmployeesSummaryByLeader": {
+      "DisplayName": "OldEmployeesSummaryByLeader",
+      "Fields": {},
+      "Sources": [
+        {
+          "Entities": [
+            "Employee"
+          ],
+          "Joins": [],
+          "Items": [
+            {
+              "Type": "Expression",
+              "Expression": "IsNull(Employee.Manager)",
+              "Items": []
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Api": {
+    "Items": {
+      "OldEmployeesSummaryGetPage": {
+        "Type": "GetPage",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "Category": "Condition",
+        "Request": [
+          {
+            "Value": "OldEmployeesSummaryByDepartment",
+            "Category": "Condition"
+          }
+        ],
+        "Response": {
+          "Parameter": "OldEmployeesSummaryGetPageResponse"
+        },
+        "Orders": [],
+        "Groups": []
+      },
+      "OldEmployeesSummaryByLeaderGetPage": {
+        "Type": "GetPage",
+        "Description": "",
+        "Authorize": true,
+        "AuthorizePolicy": "",
+        "IsAsynchronous": true,
+        "IsEnableDataProtocal": true,
+        "Category": "Condition",
+        "Request": [
+          {
+            "Value": "OldEmployeesSummaryByLeader",
+            "Category": "Condition"
+          }
+        ],
+        "Response": {
+          "Parameter": "OldEmployeesSummaryByLeaderGetPageResponse"
+        },
+        "Orders": [],
+        "Groups": []
+      }
+    },
+    "Parameters": {
+      "OldEmployeesSummaryGetPageResponse": {
+        "Fields": [
+          {
+            "Name": "Name",
+            "OutputValueType": "Field",
+            "OutputValue": "Department.DepartmentName",
+            "Children": []
+          },
+          {
+            "Name": "EmployeeCount",
+            "OutputValueType": "Expression",
+            "OutputValue": "Count(Department.Employees)",
+            "Children": []
+          },
+          {
+            "Name": "MaleCount",
+            "OutputValueType": "Expression",
+            "OutputValue": "Count((Department.Employees.Gender == Gender.Male))",
+            "Children": []
+          },
+          {
+            "Name": "FemaleCount",
+            "OutputValueType": "Field",
+            "Children": []
+          }
+        ]
+      },
+      "OldEmployeesSummaryByLeaderGetPageResponse": {
+        "Fields": [
+          {
+            "Name": "Name",
+            "OutputValueType": "Field",
+            "OutputValue": "Employee.FullName",
+            "Children": []
+          },
+          {
+            "Name": "EmployeeCount",
+            "OutputValueType": "Expression",
+            "OutputValue": "Count(Employee.Childs)",
+            "Children": []
+          },
+          {
+            "Name": "MaleCount",
+            "OutputValueType": "Expression",
+            "OutputValue": "Count((Employee.Childs.Gender == Gender.Male))",
+            "Children": []
+          },
+          {
+            "Name": "FemaleCount",
+            "OutputValueType": "Field",
+            "Children": []
+          }
+        ]
+      }
+    }
+  },
+  "References": {
+    "Department": "..\\Entity\\Department.dmedm",
+    "Employee": "..\\Entity\\Employee.dmedm",
+    "Gender": "..\\Enum\\Gender.dme"
+  }
+}

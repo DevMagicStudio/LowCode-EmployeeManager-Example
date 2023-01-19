@@ -1,0 +1,134 @@
+﻿{
+  "Type": "View",
+  "Version": 1,
+  "DisplayName": "Employee Filter By Department",
+  "Description": "",
+  "DesignVersion": "1.0.0",
+  "Template": "Vue/Index_Search",
+  "Events": {
+    "query_api": {
+      "Name": "query_api",
+      "OptionApi": "Employee.DepartmentUserGetPage"
+    }
+  },
+  "Areas": {
+    "area_search": {
+      "Source": "Employee",
+      "Condition": "DepartmentUser",
+      "Properties": {
+        "search_label_format": "Right",
+        "search_label_width": 130
+      },
+      "Fields": {
+        "Department": {
+          "DisplayName": "Department",
+          "DisplayType": "SelectBox",
+          "Description": "",
+          "OptionApi": "Department.GetList",
+          "OptionSelectName": "DepartmentName",
+          "WaterMark": ""
+        },
+        "Gender": {
+          "DisplayName": "Gender",
+          "DisplayType": "SelectBox",
+          "Description": "",
+          "WaterMark": ""
+        },
+        "IsTrial": {
+          "DisplayName": "IsTrial",
+          "DisplayType": "CheckBox",
+          "Description": "",
+          "WaterMark": ""
+        }
+      },
+      "Menus": []
+    },
+    "area_table_head": {
+      "Properties": {
+        "btn_create_enabled": false,
+        "btn_create_style": "dialog"
+      },
+      "Fields": {},
+      "Menus": []
+    },
+    "area_table": {
+      "Source": "Employee",
+      "Properties": {
+        "is_data_mounted": true,
+        "btn_update_enabled": false,
+        "btn_update_style": "dialog",
+        "btn_detail_enabled": true,
+        "btn_detail_page": "EmployeeDetail",
+        "btn_detail_style": "dialog",
+        "btn_delete_enabled": false,
+        "table_column_ellipsis": true
+      },
+      "Fields": {
+        "Id": {
+          "DisplayName": "Id",
+          "DisplayType": "Text",
+          "Description": "Data unique identifier."
+        },
+        "FullName": {
+          "DisplayName": "Full Name",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "Gender": {
+          "DisplayName": "Gender",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "Phone": {
+          "DisplayName": "Phone Number",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "HireDate": {
+          "DisplayName": "Hire Date",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "TrialMonths": {
+          "DisplayName": "Trial Months",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "IsTrial": {
+          "DisplayName": "Is Trial",
+          "DisplayType": "CheckBox",
+          "Description": ""
+        },
+        "Department": {
+          "DisplayName": "Department",
+          "DisplayType": "Text",
+          "Description": "",
+          "Formatter": "DepartmentName",
+          "FormatterType": "Field",
+          "ChildrenSetting": "NoDisplay"
+        },
+        "Manager": {
+          "DisplayName": "Manager",
+          "DisplayType": "Text",
+          "Description": "",
+          "Formatter": "FullName",
+          "FormatterType": "Field",
+          "ChildrenSetting": "NoDisplay"
+        },
+        "IsManager": {
+          "DisplayName": "Is Manager",
+          "DisplayType": "CheckBox",
+          "Description": ""
+        }
+      },
+      "Menus": []
+    }
+  },
+  "Properities": {},
+  "Parameters": {},
+  "References": {
+    "Employee": "..\\..\\Entity\\Employee.dmedm",
+    "Department": "..\\..\\Entity\\Department.dmedm",
+    "EmployeeDetail": "EmployeeDetail.dmv"
+  }
+}

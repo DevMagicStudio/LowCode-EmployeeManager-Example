@@ -1,0 +1,51 @@
+﻿{
+  "Type": "Entity",
+  "Version": 1,
+  "DisplayName": "BaseEntity",
+  "Description": "BaseEntity",
+  "DesignVersion": "1.0.0",
+  "OnlyAllowInherited": true,
+  "InheritStrategy": "",
+  "PrimaryKey": {
+    "Name": "",
+    "Columns": [
+      "Id"
+    ]
+  },
+  "Fields": {
+    "Id": {
+      "IsKey": true,
+      "KeyName": "Id",
+      "DisplayName": "Id",
+      "Description": "Data unique identifier.",
+      "Type": "Int32",
+      "DataType": "Int32",
+      "IsRequired": true,
+      "IsRequiredError": "Data unique identifier is required.",
+      "DefaultValueType": "Value"
+    },
+    "InsertTime": {
+      "DisplayName": "InsertTime",
+      "Description": "",
+      "Type": "DateTime",
+      "DataType": "DateTime",
+      "DefaultValue": "Now()",
+      "DefaultValueType": "Expression"
+    },
+    "UpdateTime": {
+      "DisplayName": "UpdateTime",
+      "Description": "",
+      "Type": "DateTime",
+      "DataType": "DateTime",
+      "DefaultValue": "Now()",
+      "DefaultValueType": "Expression"
+    }
+  },
+  "Indexs": [],
+  "Conditions": {},
+  "Api": {
+    "Items": {},
+    "Parameters": {}
+  },
+  "References": {}
+}

@@ -1,0 +1,63 @@
+﻿{
+  "Type": "View",
+  "Version": 1,
+  "DisplayName": "Employee Summary By Manager",
+  "Description": "",
+  "DesignVersion": "1.0.0",
+  "Template": "Vue/Index",
+  "Events": {
+    "query_api": {
+      "Name": "query_api",
+      "OptionApi": "DepartmentUsers.OldEmployeesSummaryByLeaderGetPage"
+    }
+  },
+  "Areas": {
+    "area_table_head": {
+      "Properties": {
+        "btn_create_enabled": false,
+        "btn_create_style": "dialog"
+      },
+      "Fields": {},
+      "Menus": []
+    },
+    "area_table": {
+      "Source": "DepartmentUsers",
+      "Properties": {
+        "btn_update_enabled": false,
+        "btn_update_style": "dialog",
+        "btn_detail_enabled": false,
+        "btn_detail_style": "dialog",
+        "btn_delete_enabled": false,
+        "table_column_ellipsis": false
+      },
+      "Fields": {
+        "Name": {
+          "DisplayName": "Manager",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "EmployeeCount": {
+          "DisplayName": "Employee Count",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "MaleCount": {
+          "DisplayName": "Male Employee Count",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "FemaleCount": {
+          "DisplayName": "Female Employee Count",
+          "DisplayType": "Text",
+          "Description": ""
+        }
+      },
+      "Menus": []
+    }
+  },
+  "Properities": {},
+  "Parameters": {},
+  "References": {
+    "DepartmentUsers": "..\\..\\Model\\DepartmentUsers.dmmdl"
+  }
+}

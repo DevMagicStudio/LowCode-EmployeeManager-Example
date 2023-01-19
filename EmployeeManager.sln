@@ -1,0 +1,27 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{6CE2D480-4C89-42CB-A5BB-7B2BCA57D0CE}") = "EmployeeManager", "EmployeeManager\EmployeeManager.dmproj", "{27035030-24F5-4FB9-88D3-2AC889D91DE8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = CBCFB52C-8647-4B89-9E62-E0541A617B9D
+	EndGlobalSection
+
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+	EndGlobalSection
+
+	GlobalSection(NestedProjects) = preSolution
+	EndGlobalSection
+
+EndGlobal

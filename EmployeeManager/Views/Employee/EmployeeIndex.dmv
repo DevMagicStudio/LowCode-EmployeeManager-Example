@@ -1,0 +1,140 @@
+﻿{
+  "Type": "View",
+  "Version": 1,
+  "DisplayName": "Employee Information",
+  "Description": "",
+  "DesignVersion": "1.0.0",
+  "Template": "Vue/Index_Search",
+  "Events": {
+    "query_api": {
+      "Name": "query_api",
+      "OptionApi": "Employee.GenericSearchGetPage"
+    }
+  },
+  "Areas": {
+    "area_search": {
+      "Source": "Employee",
+      "Condition": "GenericSearch",
+      "Properties": {
+        "search_label_format": "Right",
+        "search_label_width": 130
+      },
+      "Fields": {
+        "Keywords": {
+          "DisplayName": "Keywords",
+          "DisplayType": "Text",
+          "Description": "",
+          "WaterMark": ""
+        },
+        "Phone": {
+          "DisplayName": "Phone Number",
+          "DisplayType": "Text",
+          "Description": "",
+          "WaterMark": ""
+        }
+      },
+      "Menus": []
+    },
+    "area_table_head": {
+      "Properties": {
+        "btn_create_enabled": true,
+        "btn_create_page": "EmployeeCreate",
+        "btn_create_style": "dialog"
+      },
+      "Fields": {},
+      "Menus": []
+    },
+    "area_table": {
+      "Source": "Employee",
+      "Properties": {
+        "is_data_mounted": true,
+        "btn_update_enabled": true,
+        "btn_update_page": "EmployeeUpdate",
+        "btn_update_style": "dialog",
+        "btn_detail_enabled": true,
+        "btn_detail_page": "EmployeeDetail",
+        "btn_detail_style": "drawer",
+        "btn_delete_enabled": true,
+        "btn_delete_api": "@API.Employee.Delete",
+        "table_column_ellipsis": true
+      },
+      "Fields": {
+        "Id": {
+          "DisplayName": "Id",
+          "DisplayType": "Text",
+          "Description": "Data unique identifier."
+        },
+        "FirstName": {
+          "DisplayName": "First Name",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "LastName": {
+          "DisplayName": "Last Name",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "FullName": {
+          "DisplayName": "Full Name",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "Gender": {
+          "DisplayName": "Gender",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "Phone": {
+          "DisplayName": "Phone Number",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "HireDate": {
+          "DisplayName": "Hire Date",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "TrialMonths": {
+          "DisplayName": "Trial Months",
+          "DisplayType": "Text",
+          "Description": ""
+        },
+        "IsTrial": {
+          "DisplayName": "Is Trial",
+          "DisplayType": "CheckBox",
+          "Description": ""
+        },
+        "Department": {
+          "DisplayName": "Department",
+          "DisplayType": "Text",
+          "Description": "",
+          "Formatter": "DepartmentName",
+          "FormatterType": "Field",
+          "ChildrenSetting": "NoDisplay"
+        },
+        "Manager": {
+          "DisplayName": "Manager",
+          "DisplayType": "Text",
+          "Description": "",
+          "Formatter": "FullName",
+          "FormatterType": "Field",
+          "ChildrenSetting": "NoDisplay"
+        },
+        "IsManager": {
+          "DisplayName": "Is Manager",
+          "DisplayType": "CheckBox",
+          "Description": ""
+        }
+      },
+      "Menus": []
+    }
+  },
+  "Properities": {},
+  "Parameters": {},
+  "References": {
+    "Employee": "..\\..\\Entity\\Employee.dmedm",
+    "EmployeeCreate": "EmployeeCreate.dmv",
+    "EmployeeUpdate": "EmployeeUpdate.dmv",
+    "EmployeeDetail": "EmployeeDetail.dmv"
+  }
+}
